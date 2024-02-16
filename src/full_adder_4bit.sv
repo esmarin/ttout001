@@ -17,7 +17,7 @@ module tt_um_esmarin (
     input  wire       rst_n     // reset_n - low to reset
 );
     // use bidirectional pins 4 for output(1) and 4  for input (0)
-    assign uio_oe = 8'11110000
+    assign uio_oe = 8'11110000;
 
     // internal signals used in this module
     logic c1, c2, c3;
