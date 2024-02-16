@@ -16,8 +16,8 @@ module tt_um_esmarin (
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
-    // use bidirectional pins 7 for output(1) and 1  for input (0)
-    // the input pin will be used for cin , the others won't be used.
+    // use 7 bidirectional pins for output(1) and 1  for input (0)
+    // the input pin will be used for cin , the outputs won't be used.
     assign uio_oe = 11111110;
 
     // internal signals used in this module
