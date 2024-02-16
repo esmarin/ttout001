@@ -23,10 +23,32 @@ async def test_adder(dut):
   dut.rst_n.value = 1
 
   # Set the input values, wait one clock cycle, and check the output
-  dut._log.info("Test")
-  dut.ui_in.value = 22
+  dut._log.info("Test simple 2 + 2")
+  dut.ui_in.value = 0x22
   dut.uio_in.value = 0
-
   await ClockCycles(dut.clk, 1)
+  assert dut.uo_out.value == 4
 
-  # assert dut.uo_out.value == 4
+  dut._log.info("Test simple 9 + 6")
+  dut.ui_in.value = 0x96
+  dut.uio_in.value = 0
+  await ClockCycles(dut.clk, 1)
+  assert dut.uo_out.value == 0xF
+
+  dut._log.info("Test simple 9 + 6 + 1")
+  dut.ui_in.value = 0x96
+  dut.uio_in.value = 1
+  await ClockCycles(dut.clk, 1)
+  assert dut.uo_out.value == 0x10
+
+  dut._log.info("Test max F + F")
+  dut.ui_in.value = 0xFF
+  dut.uio_in.value = 0
+  await ClockCycles(dut.clk, 1)
+  assert dut.uo_out.value == 30
+
+  dut._log.info("Test max F + F + 1")
+  dut.ui_in.value = 0xFF
+  dut.uio_in.value = 1
+  await ClockCycles(dut.clk, 1)
+  assert dut.uo_out.value == 31

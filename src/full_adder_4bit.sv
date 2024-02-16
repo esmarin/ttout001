@@ -6,7 +6,7 @@
 `define default_netname none
 
 module tt_um_esmarin (
-	// The top module has to have this input/output definition.
+     // The top module has to have this input/output definition.
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
     input  wire [7:0] uio_in,   // IOs: Input path
@@ -16,13 +16,15 @@ module tt_um_esmarin (
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
-    // use bidirectional pins 4 for output(1) and 4  for input (0)
+    // use bidirectional pins 7 for output(1) and 1  for input (0)
+    // the input pin will be used for cin , the others won't be used.
     assign uio_oe = 11111110;
 
     // internal signals used in this module
     logic c1, c2, c3;
 
     // instantiate 1-bit full-adders
+    // full_adder ( a,       b,        cin,       sum,       cout);
     full_adder FA0(ui_in[0], ui_in[4], uio_in[0], uo_out[0], c1);
     full_adder FA1(ui_in[1], ui_in[5], c1,        uo_out[1], c2);
     full_adder FA2(ui_in[2], ui_in[6], c2,        uo_out[2], c3);
